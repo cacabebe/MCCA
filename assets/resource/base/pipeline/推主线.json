@@ -1,0 +1,73 @@
+{
+    "主线_入口": {
+        "doc": "从已打开的普通或困难主线界面、剧情或战斗中接续。保持当前难度、原队伍与自动战斗设置。",
+        "next": ["主线_燃料不足", "主线_战败", "主线_获得角色", "主线_章节完成", "主线_跳过确认", "主线_跳过剧情", "主线_胜利", "主线_获得物品", "主线_新关卡", "主线_开始行动", "主线_开始战斗", "主线_开始播放", "主线_下一区域"],
+        "timeout": 600000,
+        "rate_limit": 1500
+    },
+    "主线_已选关卡": {
+        "doc": "点选新关卡后只等待详情或编队按钮，不再次点击仍显示的新标记。",
+        "next": ["主线_燃料不足", "主线_战败", "主线_开始行动", "主线_开始战斗", "主线_开始播放"],
+        "timeout": 30000, "rate_limit": 1000
+    },
+    "主线_关卡结束": {
+        "doc": "剧情或战斗完成后只处理奖励和下一关，不点击残留的开始播放/开始战斗重打已通关关卡。无新关卡则超时停止。",
+        "next": ["主线_燃料不足", "主线_战败", "主线_获得角色", "主线_章节完成", "主线_胜利", "主线_获得物品", "主线_新关卡", "主线_下一区域"],
+        "timeout": 30000, "rate_limit": 1000
+    },
+    "主线_燃料不足": {
+        "recognition": "OCR", "expected": "燃料补给|燃料不足", "roi": [240, 80, 800, 300],
+        "doc": "结束任务，保留补给弹窗，不购买或使用燃料。"
+    },
+    "主线_战败": {
+        "recognition": "OCR", "expected": "战斗失败|战斗失利|战斗败北|挑战失败", "roi": [0, 0, 640, 240],
+        "doc": "结束任务，保留战败界面，不重复消耗燃料。"
+    },
+    "主线_跳过确认": {
+        "recognition": "OCR", "expected": "跳过剧情", "roi": [260, 160, 260, 60],
+        "action": "Click", "target": [796, 443, 12, 12], "post_delay": 1200, "next": "主线_关卡结束"
+    },
+    "主线_跳过剧情": {
+        "recognition": "OCR", "expected": "跳过", "roi": [1110, 18, 100, 44],
+        "action": "Click", "post_delay": 600, "next": "主线_跳过确认", "timeout": 15000
+    },
+    "主线_胜利": {
+        "recognition": "TemplateMatch", "template": "MainStory/Victory.png", "threshold": 0.85, "roi": [10, 10, 370, 140],
+        "action": "Click", "target": [630, 430, 20, 20], "post_delay": 1800, "next": "主线_关卡结束"
+    },
+    "主线_获得物品": {
+        "recognition": "OCR", "expected": "获得物品", "roi": [430, 150, 420, 100],
+        "action": "Click", "target": [630, 530, 20, 15], "post_delay": 1000, "next": "主线_关卡结束"
+    },
+    "主线_获得角色": {
+        "recognition": "TemplateMatch", "template": "MainStory/CharacterRole.png", "threshold": 0.85, "roi": [980, 245, 130, 65],
+        "action": "Click", "target": [620, 545, 20, 20], "post_delay": 1800, "next": "主线_关卡结束",
+        "doc": "获得角色的全屏展示，点击空白处继续；不点击右下角分享。"
+    },
+    "主线_章节完成": {
+        "recognition": "OCR", "expected": "第.*章.*任务完成", "roi": [330, 370, 650, 55],
+        "action": "Click", "target": [620, 540, 20, 20], "post_delay": 1800, "next": "主线_关卡结束"
+    },
+    "主线_开始行动": {
+        "recognition": "OCR", "expected": "开始行动", "roi": [1080, 620, 160, 80],
+        "action": "Click", "post_delay": 2500, "next": "主线_入口"
+    },
+    "主线_开始战斗": {
+        "recognition": "OCR", "expected": "开始战斗", "roi": [1110, 620, 150, 80],
+        "action": "Click", "post_delay": 1200, "next": "主线_入口"
+    },
+    "主线_开始播放": {
+        "recognition": "OCR", "expected": "开始播放", "roi": [1070, 590, 160, 90],
+        "action": "Click", "post_delay": 1800, "next": "主线_入口"
+    },
+    "主线_新关卡": {
+        "recognition": "TemplateMatch", "template": "MainStory/NewStage.png", "threshold": 0.85, "roi": [380, 135, 40, 450],
+        "action": "Click", "post_delay": 1000, "next": "主线_已选关卡"
+    },
+    "主线_下一区域": {
+        "recognition": "OCR", "expected": "100%", "roi": [325, 110, 100, 120],
+        "action": "Click", "target": [1207, 350, 15, 20], "post_delay": 2000,
+        "next": ["主线_新关卡"], "timeout": 15000,
+        "doc": "当前区域完成后只翻一页；未出现新关卡则停止，不无限翻页。"
+    }
+}

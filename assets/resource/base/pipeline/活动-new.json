@@ -1,1 +1,283 @@
-{}
+{
+    "当期活动_入口": {
+        "next": [
+            "子任务_退出待机",
+            "子任务_关闭物品详情",
+            "子任务_关闭星贸凭证",
+            "子任务_关闭公告",
+            "子任务_关闭周年公告",
+            "子任务_获得物品",
+            "当期活动_香川大典",
+            "子任务_点击首页按钮"
+        ],
+        "timeout": 15000
+    },
+    "当期活动_香川大典": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/HomeBanner.png",
+        "threshold": 0.82,
+        "roi": [1075, 435, 200, 104],
+        "action": "Click",
+        "post_delay": 1250,
+        "next": ["当期活动_密事录红点", "当期活动_山间供奉"]
+    },
+    "当期活动_密事录红点": {
+        "recognition": "ColorMatch",
+        "roi": [371, 416, 20, 20],
+        "method": 4,
+        "lower": [220, 0, 30],
+        "upper": [255, 35, 105],
+        "count": 65,
+        "action": "Click",
+        "target": [332, 433, 44, 24],
+        "post_delay": 700,
+        "next": ["当期活动_一键领取", "当期活动_退出任务奖励"]
+    },
+    "当期活动_一键领取": {
+        "recognition": "ColorMatch",
+        "roi": [1038, 101, 16, 26],
+        "method": 4,
+        "lower": [230, 155, 45],
+        "upper": [255, 225, 125],
+        "count": 140,
+        "action": "Click",
+        "target": [1080, 104, 45, 22],
+        "post_delay": 850,
+        "next": ["子任务_获得物品", "当期活动_退出任务奖励"]
+    },
+    "当期活动_退出任务奖励": {
+        "recognition": "OCR",
+        "expected": "任务奖励",
+        "roi": [80, 87, 222, 63],
+        "action": "Click",
+        "target": [62, 37, 35, 22],
+        "post_delay": 700,
+        "next": ["当期活动_山间供奉"]
+    },
+    "当期活动_山间供奉": {
+        "recognition": "OCR",
+        "expected": "山间供奉",
+        "roi": [230, 278, 137, 36],
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["当期活动_入场券售罄", "当期活动_商店首格入场券"]
+    },
+    "当期活动_商店首格入场券": {
+        "recognition": "OCR",
+        "expected": "入场[券卷]",
+        "roi": [87, 322, 102, 32],
+        "action": "Click",
+        "post_delay": 500,
+        "next": ["当期活动_购票数量最大"]
+    },
+    "当期活动_入场券售罄": {
+        "recognition": "OCR",
+        "expected": "售[罄磬]|已兑完",
+        "roi": [45, 196, 180, 202],
+        "next": ["当期活动_退出商店"]
+    },
+    "当期活动_购票数量最大": {
+        "recognition": "OCR",
+        "expected": "^最大$",
+        "roi": [961, 407, 81, 42],
+        "action": "Click",
+        "post_delay": 500,
+        "next": ["当期活动_购买入场券"]
+    },
+    "当期活动_燃料不足": {
+        "recognition": "OCR",
+        "expected": "货币不足",
+        "roi": [470, 291, 343, 60],
+        "action": "Click",
+        "target": [442, 435, 69, 29],
+        "post_delay": 450,
+        "next": ["当期活动_关闭购票弹窗"]
+    },
+    "当期活动_购买入场券": {
+        "recognition": "OCR",
+        "expected": "^购买$",
+        "roi": [831, 516, 102, 42],
+        "action": "Click",
+        "post_delay": 850,
+        "next": ["当期活动_燃料不足", "子任务_获得物品", "当期活动_退出商店"],
+        "timeout": 15000
+    },
+    "当期活动_关闭购票弹窗": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/ShopClose.png",
+        "threshold": 0.9,
+        "roi": [997, 122, 56, 46],
+        "action": "Click",
+        "post_delay": 500,
+        "next": ["当期活动_退出商店"]
+    },
+    "当期活动_退出商店": {
+        "recognition": "OCR",
+        "expected": "兑换站点",
+        "roi": [76, 114, 119, 44],
+        "action": "Click",
+        "target": [62, 37, 35, 22],
+        "post_delay": 700,
+        "next": ["当期活动_前往祭典"]
+    },
+    "当期活动_前往祭典": {
+        "recognition": "OCR",
+        "expected": "前往祭典",
+        "roi": [945, 582, 165, 44],
+        "action": "Click",
+        "post_delay": 1000,
+        "next": ["当期活动_困难模式"]
+    },
+    "当期活动_困难模式": {
+        "recognition": "OCR",
+        "expected": "困难模式",
+        "roi": [83, 169, 103, 41],
+        "action": "Click",
+        "post_delay": 650,
+        "next": ["当期活动_确认困难模式"]
+    },
+    "当期活动_确认困难模式": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/HardSelected.png",
+        "threshold": 0.89,
+        "roi": [22, 170, 79, 44],
+        "next": ["当期活动_困难首关"]
+    },
+    "当期活动_困难首关": {
+        "recognition": "OCR",
+        "expected": "^(初遇.*)?香川庄[园圆]$",
+        "roi": [111, 591, 171, 44],
+        "action": "Click",
+        "post_delay": 650,
+        "next": ["当期活动_首关详情"]
+    },
+    "当期活动_首关详情": {
+        "recognition": "OCR",
+        "expected": "初遇.*香川庄[园圆]",
+        "roi": [785, 72, 286, 59],
+        "next": ["当期活动_扫荡可用"]
+    },
+    "当期活动_扫荡可用": {
+        "recognition": "OCR",
+        "expected": "^扫荡$",
+        "roi": [804, 565, 70, 49],
+        "next": ["当期活动_双倍耗尽", "当期活动_双倍已开", "当期活动_开启双倍"]
+    },
+    "当期活动_开启双倍": {
+        "recognition": "ColorMatch",
+        "roi": [1077, 632, 26, 27],
+        "method": 4,
+        "lower": [245, 245, 245],
+        "upper": [255, 255, 255],
+        "count": 80,
+        "action": "Click",
+        "target": [1091, 637, 40, 17],
+        "post_delay": 450,
+        "next": ["当期活动_双倍耗尽", "当期活动_双倍已开"]
+    },
+    "当期活动_双倍已开": {
+        "recognition": "ColorMatch",
+        "roi": [1097, 638, 20, 15],
+        "method": 4,
+        "lower": [225, 155, 40],
+        "upper": [255, 220, 115],
+        "count": 180,
+        "next": ["当期活动_打开扫荡"]
+    },
+    "当期活动_双倍耗尽": {
+        "recognition": "OCR",
+        "expected": "^0[/／]6$",
+        "roi": [1027, 632, 47, 27],
+        "only_rec": true,
+        "next": ["当期活动_打开扫荡"]
+    },
+    "当期活动_打开扫荡": {
+        "recognition": "OCR",
+        "expected": "^扫荡$",
+        "roi": [804, 565, 70, 49],
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["当期活动_扫荡面板"]
+    },
+    "当期活动_扫荡面板": {
+        "recognition": "OCR",
+        "expected": "^扫荡$",
+        "roi": [201, 114, 70, 44],
+        "next": ["当期活动_扫荡次数过多", "当期活动_确认扫荡"]
+    },
+    "当期活动_入场券不足": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/SweepOne.png",
+        "threshold": 0.94,
+        "roi": [281, 499, 112, 39],
+        "action": "Click",
+        "target": [624, 70, 30, 20],
+        "post_delay": 400,
+        "next": ["当期活动_回首页"]
+    },
+    "当期活动_扫荡次数过多": {
+        "recognition": "ColorMatch",
+        "roi": [735, 553, 54, 30],
+        "method": 4,
+        "lower": [170, 0, 0],
+        "upper": [255, 115, 115],
+        "count": 13,
+        "next": ["当期活动_入场券不足", "当期活动_减少扫荡次数"]
+    },
+    "当期活动_减少扫荡次数": {
+        "recognition": "OCR",
+        "expected": "^(?:[2-9]|[1-9][0-9]+)$",
+        "roi": [310, 509, 176, 19],
+        "only_rec": true,
+        "action": "Click",
+        "target": [228, 547, 48, 25],
+        "post_delay": 350,
+        "next": ["当期活动_扫荡面板"]
+    },
+    "当期活动_确认扫荡": {
+        "recognition": "ColorMatch",
+        "roi": [735, 553, 54, 30],
+        "method": 4,
+        "lower": [225, 225, 225],
+        "upper": [255, 255, 255],
+        "count": 13,
+        "action": "Click",
+        "target": [968, 544, 97, 35],
+        "post_delay": 800,
+        "next": ["当期活动_使用双倍", "当期活动_扫荡结算"],
+        "timeout": 20000
+    },
+    "当期活动_使用双倍": {
+        "recognition": "OCR",
+        "expected": "^使用$",
+        "roi": [751, 420, 109, 52],
+        "action": "Click",
+        "post_delay": 850,
+        "next": ["当期活动_扫荡结算"],
+        "timeout": 20000
+    },
+    "当期活动_扫荡结算": {
+        "recognition": "OCR",
+        "expected": "^扫荡奖励$",
+        "roi": [580, 13, 182, 47],
+        "action": "Click",
+        "target": [180, 75, 85, 32],
+        "post_delay": 950,
+        "next": ["扫荡升级", "当期活动_首关详情", "当期活动_扫荡结算"]
+    },
+    "当期活动_回首页": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/HomeButton.png",
+        "threshold": 0.92,
+        "roi": [194, 25, 52, 47],
+        "action": "Click",
+        "post_delay": 850,
+        "next": ["当期活动_首页已返回"]
+    },
+    "当期活动_首页已返回": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/HomeBanner.png",
+        "threshold": 0.82,
+        "roi": [1075, 435, 200, 104]
+    }
+}

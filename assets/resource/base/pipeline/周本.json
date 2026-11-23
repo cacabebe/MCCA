@@ -1,6 +1,12 @@
 {
     "WeekInstance": {
         "next": [
+            "子任务_退出待机",
+            "子任务_关闭物品详情",
+            "子任务_关闭星贸凭证",
+            "子任务_关闭公告",
+            "子任务_关闭周年公告",
+            "子任务_获得物品",
             "首页_出击",
             "子任务_进入首页"
         ]
@@ -29,10 +35,10 @@
             "碎星虚影"
         ],
         "roi": [
-            450,
-            443,
-            302,
-            98
+            300,
+            200,
+            500,
+            400
         ],
         "action": "Click",
         "post_delay": 3000,
@@ -48,10 +54,10 @@
             "戈里刻虚影"
         ],
         "roi": [
-            100,
-            333,
-            500,
-            154
+            50,
+            250,
+            400,
+            250
         ],
         "action": "Click",
         "post_delay": 2000,
@@ -84,14 +90,35 @@
             "虚影宙斯"
         ],
         "roi": [
-            682,
-            456,
-            180,
-            180
+            650,
+            134,
+            168,
+            496
         ],
         "action": "Click",
+        "target_offset": [
+            -90,
+            -30,
+            0,
+            0
+        ],
         "next": [
             "ActivityExploration_Exist",
+            "ActivityExploration_第五关已选中"
+        ]
+    },
+    "ActivityExploration_第五关已选中": {
+        "recognition": "OCR",
+        "expected": [
+            "^虚影宙斯$"
+        ],
+        "roi": [
+            860,
+            80,
+            380,
+            44
+        ],
+        "next": [
             "ActivityExploration_第五关Start"
         ]
     },
@@ -165,10 +192,10 @@
             "开启"
         ],
         "roi": [
-            722,
-            405,
-            190,
-            94
+            700,
+            380,
+            260,
+            140
         ],
         "action": "Click",
         "post_delay": 2000
@@ -177,10 +204,10 @@
         "is_sub": true,
         "recognition": "ColorMatch",
         "roi": [
-            1153,
-            380,
-            21,
-            14
+            1140,
+            370,
+            70,
+            40
         ],
         "method": 4,
         "lower": [
@@ -210,6 +237,7 @@
         "action": "Click",
         "post_delay": 2000,
         "next": [
+            "战斗_自动战斗",
             "ActivityExploration_Step_1",
             "ActivityExploration_Start_1"
         ]
@@ -228,6 +256,7 @@
         "action": "Click",
         "post_delay": 2000,
         "next": [
+            "战斗_自动战斗",
             "ActivityExploration_第五关Step_1",
             "ActivityExploration_第五关Start_1"
         ]
@@ -513,29 +542,39 @@
             59
         ],
         "next": [
+            "跳过boss演出动画",
             "战斗_自动战斗",
             "战斗_启用二倍速",
             "ActivityExploration_CombatEnd1",
             "ActivityExploration_Combating1"
-        ]
+        ],
+        "timeout": 180000
     },
     "ActivityExploration_CombatEnd1": {
         "recognition": "OCR",
         "expected": [
-            "等级"
+            "战斗胜利",
+            "战斗失败"
         ],
         "roi": [
-            210,
-            410,
-            97,
-            152
+            15,
+            15,
+            560,
+            150
         ],
         "action": "Click",
         "next": [
             "子任务_获得物品",
             "ActivityExploration_Step_3",
             "ActivityExploration_CombatEnd1"
-        ]
+        ],
+        "target": [
+            1100,
+            350,
+            100,
+            100
+        ],
+        "post_delay": 1500
     },
     "ActivityExploration_Combating2": {
         "recognition": "TemplateMatch",
@@ -547,29 +586,39 @@
             59
         ],
         "next": [
+            "跳过boss演出动画",
             "战斗_自动战斗",
             "战斗_启用二倍速",
             "ActivityExploration_CombatEnd2",
             "ActivityExploration_Combating2"
-        ]
+        ],
+        "timeout": 180000
     },
     "ActivityExploration_CombatEnd2": {
         "recognition": "OCR",
         "expected": [
-            "等级"
+            "战斗胜利",
+            "战斗失败"
         ],
         "roi": [
-            210,
-            410,
-            97,
-            152
+            15,
+            15,
+            560,
+            150
         ],
         "action": "Click",
         "next": [
             "子任务_获得物品",
             "ActivityExploration_Step_4",
             "ActivityExploration_CombatEnd2"
-        ]
+        ],
+        "target": [
+            1100,
+            350,
+            100,
+            100
+        ],
+        "post_delay": 1500
     },
     "ActivityExploration_Combating3": {
         "recognition": "TemplateMatch",
@@ -581,30 +630,40 @@
             59
         ],
         "next": [
+            "跳过boss演出动画",
             "子任务_获得物品",
             "战斗_自动战斗",
             "战斗_启用二倍速",
             "ActivityExploration_CombatEnd3",
             "ActivityExploration_Combating3"
-        ]
+        ],
+        "timeout": 180000
     },
     "ActivityExploration_CombatEnd3": {
         "recognition": "OCR",
         "expected": [
-            "等级"
+            "战斗胜利",
+            "战斗失败"
         ],
         "roi": [
-            210,
-            410,
-            97,
-            152
+            15,
+            15,
+            560,
+            150
         ],
         "action": "Click",
         "next": [
             "子任务_获得物品",
             "ActivityExploration_第五关",
             "ActivityExploration_CombatEnd3"
-        ]
+        ],
+        "target": [
+            1100,
+            350,
+            100,
+            100
+        ],
+        "post_delay": 1500
     },
     "ActivityExploration_SwipeUp": {
         "is_sub": true,
@@ -636,6 +695,8 @@
             196,
             40,
             40
-        ]
+        ],
+        "duration": 450,
+        "post_delay": 750
     }
 }

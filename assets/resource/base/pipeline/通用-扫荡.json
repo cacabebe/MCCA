@@ -14,6 +14,7 @@
             "threshold": 0.95
         },
         "next": [
+            "自选扫荡次数",
             "扫荡次数选择"
         ],
         "focus": true
@@ -21,40 +22,40 @@
     "扫荡次数选择": {
         "enabled": true,
         "next": [
-            "检查体力-红",
-            "检查体力-白"
+            "检查燃料-红",
+            "扫荡_达到次数上限",
+            "检查燃料-白"
         ],
         "interrupt": [
             "重连网络"
         ]
     },
     "增加次数": {
-        "recognition": "TemplateMatch",
-        "template": "选择次数.png",
-        "roi": [
-            503,
-            531,
-            84,
-            59
-        ],
         "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
         "next": [
             "扫荡次数选择"
-        ]
+        ],
+        "post_delay": 300
     },
-    "检查体力-白": {
+    "检查燃料-白": {
         "recognition": "ColorMatch",
         "roi": [
             730,
             547,
-            56,
-            38
+            62,
+            35
         ],
         "method": 4,
         "lower": [
-            255,
-            255,
-            255
+            220,
+            220,
+            220
         ],
         "upper": [
             255,
@@ -68,16 +69,27 @@
         },
         "next": [
             "增加次数"
-        ]
+        ],
+        "count": 12
     },
-    "检查体力-红": {
-        "recognition": "TemplateMatch",
-        "template": "扫荡次数.png",
+    "检查燃料-红": {
+        "recognition": "ColorMatch",
         "roi": [
-            719,
-            549,
-            67,
+            730,
+            547,
+            62,
             35
+        ],
+        "method": 4,
+        "lower": [
+            150,
+            0,
+            0
+        ],
+        "upper": [
+            255,
+            120,
+            120
         ],
         "action": "DoNothing",
         "pre_wait_freezes": {
@@ -85,32 +97,31 @@
             "threshold": 0.95
         },
         "next": [
+            "检查燃料-红（次数为1）",
             "减少次数"
-        ]
+        ],
+        "count": 12
     },
     "减少次数": {
-        "recognition": "TemplateMatch",
-        "template": "减少次数.png",
-        "roi": [
-            204,
-            534,
-            93,
-            50
-        ],
         "action": "Click",
+        "target": [
+            244,
+            559,
+            10,
+            10
+        ],
         "next": [
-            "检查体力-红（次数为1）",
-            "开始战斗"
-        ]
+            "扫荡_减少后检查"
+        ],
+        "post_delay": 300
     },
-    "检查体力-红（次数为1）": {
+    "检查燃料-红（次数为1）": {
         "recognition": "TemplateMatch",
-        "template": "扫荡次数.png",
         "roi": [
-            719,
-            549,
-            67,
-            35
+            200,
+            490,
+            160,
+            105
         ],
         "action": "DoNothing",
         "pre_wait_freezes": {
@@ -120,24 +131,20 @@
         "next": [
             "扫荡-取消界面"
         ],
-        "focus": true
+        "focus": true,
+        "template": "扫荡次数1.png",
+        "threshold": 0.98
     },
     "扫荡-取消界面": {
-        "recognition": "TemplateMatch",
-        "template": "返回主页.png",
-        "roi": [
-            164,
-            21,
-            112,
-            51
-        ],
-        "pre_wait_freezes": {
-            "time": 1000,
-            "threshold": 0.95
-        },
         "action": "Click",
+        "target": [
+            640,
+            80,
+            1,
+            1
+        ],
         "next": [
-            "通用-返回主页"
+            "进入首页"
         ]
     },
     "使用燃料界面": {
@@ -145,9 +152,9 @@
         "recognition": "OCR",
         "expected": "燃料补给",
         "roi": [
-            229,
-            136,
-            130,
+            190,
+            135,
+            280,
             65
         ],
         "action": "DoNothing",
@@ -161,12 +168,12 @@
     },
     "使用10燃料": {
         "recognition": "OCR",
-        "expected": "使用",
+        "expected": "恢复10燃料",
         "roi": [
-            679,
-            493,
-            118,
-            74
+            640,
+            405,
+            200,
+            65
         ],
         "action": "Click",
         "pre_wait_freezes": {
@@ -175,16 +182,22 @@
         },
         "next": [
             "使用10燃料2"
+        ],
+        "target": [
+            730,
+            520,
+            20,
+            20
         ]
     },
     "使用10燃料2": {
         "recognition": "OCR",
-        "expected": "使用",
+        "expected": "恢复10燃料",
         "roi": [
-            744,
-            451,
-            97,
-            56
+            500,
+            190,
+            350,
+            65
         ],
         "action": "Click",
         "pre_wait_freezes": {
@@ -192,17 +205,23 @@
             "threshold": 0.95
         },
         "next": [
-            "燃料补给"
+            "使用10燃料_确认"
+        ],
+        "target": [
+            585,
+            392,
+            10,
+            10
         ]
     },
     "燃料补给": {
         "recognition": "OCR",
         "expected": "燃料补给",
         "roi": [
-            499,
-            154,
-            258,
-            103
+            190,
+            135,
+            280,
+            65
         ],
         "action": "Click",
         "pre_wait_freezes": {
@@ -215,17 +234,17 @@
     },
     "燃料返回": {
         "recognition": "OCR",
-        "expected": "使用",
+        "expected": "备用燃料",
         "roi": [
-            744,
-            451,
-            97,
-            56
+            220,
+            160,
+            190,
+            60
         ],
         "action": "Click",
         "target": [
-            632,
-            82,
+            640,
+            80,
             1,
             1
         ],
@@ -234,22 +253,24 @@
             "threshold": 0.95
         },
         "next": [
-            "燃料返回2"
-        ]
+            "燃料返回2",
+            "开始战斗"
+        ],
+        "post_delay": 500
     },
     "燃料返回2": {
         "recognition": "OCR",
         "expected": "燃料补给",
         "roi": [
-            229,
-            136,
-            130,
+            190,
+            135,
+            280,
             65
         ],
         "action": "Click",
         "target": [
-            550,
-            34,
+            640,
+            80,
             1,
             1
         ],
@@ -259,16 +280,17 @@
         },
         "next": [
             "开始战斗"
-        ]
+        ],
+        "post_delay": 500
     },
     "开始战斗": {
         "recognition": "OCR",
         "expected": "开始战斗",
         "roi": [
-            946,
-            541,
-            127,
-            39
+            860,
+            500,
+            240,
+            130
         ],
         "pre_wait_freezes": {
             "time": 1000,
@@ -284,12 +306,12 @@
     },
     "开启加成": {
         "recognition": "OCR",
-        "expected": "开启",
+        "expected": "使用",
         "roi": [
-            761,
-            416,
-            83,
-            66
+            700,
+            390,
+            260,
+            120
         ],
         "action": "Click",
         "pre_wait_freezes": {
@@ -363,6 +385,210 @@
         "action": "DoNothing",
         "next": [
             "扫荡"
+        ]
+    },
+    "扫荡_减少后检查": {
+        "next": [
+            "检查燃料-红",
+            "开始战斗"
+        ]
+    },
+    "扫荡_达到次数上限": {
+        "recognition": "OCR",
+        "expected": "^10$",
+        "roi": [
+            210,
+            497,
+            380,
+            40
+        ],
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选扫荡次数": {
+        "enabled": false,
+        "next": [
+            "自选-次数已归一",
+            "自选-归一次数"
+        ]
+    },
+    "自选-次数已归一": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            200,
+            490,
+            160,
+            105
+        ],
+        "next": [
+            "自选-次数1",
+            "自选-次数2"
+        ],
+        "template": "扫荡次数1.png",
+        "threshold": 0.98
+    },
+    "自选-归一次数": {
+        "action": "Click",
+        "target": [
+            244,
+            559,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "自选扫荡次数"
+        ]
+    },
+    "自选-次数1": {
+        "enabled": false,
+        "action": "DoNothing",
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数2": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数3": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数4": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数5": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数6": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数7": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数8": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数9": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "自选-次数10": {
+        "enabled": false,
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "post_delay": 300,
+        "next": [
+            "开始战斗"
+        ]
+    },
+    "使用10燃料_确认": {
+        "recognition": "OCR",
+        "expected": "^使用$",
+        "roi": [
+            725,
+            450,
+            155,
+            65
+        ],
+        "action": "Click",
+        "post_delay": 500,
+        "next": [
+            "燃料返回",
+            "燃料返回2",
+            "开始战斗"
         ]
     }
 }

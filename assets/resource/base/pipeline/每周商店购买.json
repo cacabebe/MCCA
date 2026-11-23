@@ -1,0 +1,655 @@
+{
+    "周购_入口": {
+        "next": ["子任务_退出待机", "子任务_关闭物品详情", "子任务_关闭星贸凭证", "子任务_关闭公告", "子任务_关闭周年公告", "子任务_获得物品", "周购_入口关闭详情", "周购_万物贸易所", "周购_补给站", "子任务_点击首页按钮", "子任务_点击返回"],
+        "timeout": 25000
+    },
+    "周购_入口关闭详情": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/ShopClose.png",
+        "roi": [997, 122, 56, 46],
+        "threshold": 0.9,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [1027, 145],
+        "is_sub": true
+    },
+    "周购_补给站": {
+        "recognition": "OCR",
+        "roi": [980, 610, 160, 100],
+        "expected": "^补给站$",
+        "action": "Click",
+        "post_delay": 1000,
+        "next": ["周购_万物贸易所"],
+        "timeout": 12000
+    },
+    "周购_万物贸易所": {
+        "recognition": "OCR",
+        "roi": [92, 650, 112, 46],
+        "expected": "^万物贸易所$",
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["周购_异星灰域"],
+        "timeout": 10000
+    },
+    "周购_异星灰域": {
+        "recognition": "OCR",
+        "roi": [853, 89, 185, 35],
+        "expected": "^异星灰域$",
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["周购_灰域商品归左"],
+        "timeout": 10000
+    },
+    "周购_灰域商品归左": {
+        "recognition": "ColorMatch",
+        "roi": [850, 90, 38, 25],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 450,
+        "action": "Swipe",
+        "begin": [278, 373],
+        "end": [1218, 373],
+        "duration": 550,
+        "post_delay": 900,
+        "next": ["周购_灰域传说券列表"]
+    },
+    "周购_灰域传说券列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_灰域传说券", "周购_灰域罕见券列表"],
+        "timeout": 6500
+    },
+    "周购_灰域传说券": {
+        "recognition": "OCR",
+        "roi": [269, 296, 172, 28],
+        "expected": "^传说星尘[券卷](?:[xX×]\\s*[0-9]+)?$",
+        "only_rec": true,
+        "next": ["周购_灰域传说券有库存", "周购_灰域罕见券列表"],
+        "timeout": 6500
+    },
+    "周购_灰域传说券有库存": {
+        "recognition": "OCR",
+        "roi": [355, 337, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [355, 250],
+        "next": ["周购_灰域罕见券列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500,
+        "doc": "识别卡片底部是否显示正数价格。售罄卡片以文字替换价格。"
+    },
+    "周购_灰域罕见券列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_灰域罕见券", "周购_灰域蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_灰域罕见券": {
+        "recognition": "OCR",
+        "roi": [701, 296, 172, 28],
+        "expected": "^罕见星尘[券卷](?:[xX×]\\s*[0-9]+)?$",
+        "only_rec": true,
+        "next": ["周购_灰域罕见券有库存", "周购_灰域蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_灰域罕见券有库存": {
+        "recognition": "OCR",
+        "roi": [787, 337, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [787, 250],
+        "next": ["周购_灰域蓝图列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_灰域蓝图列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_灰域蓝图", "周购_灰域硅化剂列表"],
+        "timeout": 6500
+    },
+    "周购_灰域蓝图": {
+        "recognition": "OCR",
+        "roi": [485, 534, 172, 28],
+        "expected": "^构建蓝图$",
+        "only_rec": true,
+        "next": ["周购_灰域蓝图有库存", "周购_灰域硅化剂列表"],
+        "timeout": 6500
+    },
+    "周购_灰域蓝图有库存": {
+        "recognition": "OCR",
+        "roi": [571, 575, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [571, 488],
+        "next": ["周购_灰域硅化剂列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_灰域硅化剂列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_灰域硅化剂", "周购_灰域商品向右"],
+        "timeout": 6500
+    },
+    "周购_灰域硅化剂": {
+        "recognition": "OCR",
+        "roi": [917, 296, 172, 28],
+        "expected": "^(?:高纯|高级)硅化剂$",
+        "only_rec": true,
+        "next": ["周购_灰域硅化剂有库存", "周购_灰域商品向右"],
+        "timeout": 6500
+    },
+    "周购_灰域硅化剂有库存": {
+        "recognition": "OCR",
+        "roi": [1003, 337, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [1003, 250],
+        "next": ["周购_灰域商品向右"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_灰域商品向右": {
+        "recognition": "ColorMatch",
+        "roi": [850, 90, 38, 25],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 450,
+        "action": "Swipe",
+        "begin": [1218, 373],
+        "end": [278, 373],
+        "duration": 550,
+        "post_delay": 900,
+        "next": ["周购_灰域进化之息列表"]
+    },
+    "周购_灰域进化之息列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_灰域进化之息", "周购_罕见星尘区列表"],
+        "timeout": 6500
+    },
+    "周购_灰域进化之息": {
+        "recognition": "OCR",
+        "roi": [622, 296, 172, 28],
+        "expected": "^进化之息$",
+        "only_rec": true,
+        "next": ["周购_灰域进化之息有库存", "周购_罕见星尘区列表"],
+        "timeout": 6500
+    },
+    "周购_灰域进化之息有库存": {
+        "recognition": "OCR",
+        "roi": [708, 337, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [708, 250],
+        "next": ["周购_罕见星尘区列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_罕见星尘区列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_罕见星尘区"],
+        "timeout": 10000
+    },
+    "周购_罕见星尘区": {
+        "recognition": "OCR",
+        "roi": [260, 89, 183, 35],
+        "expected": "^罕见星尘区$",
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["周购_罕见商品向右一"],
+        "timeout": 10000
+    },
+    "周购_罕见商品向右一": {
+        "recognition": "ColorMatch",
+        "roi": [261, 90, 28, 27],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 380,
+        "action": "Swipe",
+        "begin": [1218, 373],
+        "end": [278, 373],
+        "duration": 550,
+        "post_delay": 900,
+        "next": ["周购_罕见商品向右二"]
+    },
+    "周购_罕见商品向右二": {
+        "recognition": "ColorMatch",
+        "roi": [261, 90, 28, 27],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 380,
+        "action": "Swipe",
+        "begin": [1218, 373],
+        "end": [278, 373],
+        "duration": 550,
+        "post_delay": 900,
+        "next": ["周购_罕见下排蓝图列表"]
+    },
+    "周购_罕见下排蓝图列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_罕见下排蓝图", "周购_罕见上排蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_罕见下排蓝图": {
+        "recognition": "OCR",
+        "roi": [839, 534, 172, 28],
+        "expected": "^构建蓝图$",
+        "only_rec": true,
+        "next": ["周购_罕见下排蓝图有库存", "周购_罕见上排蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_罕见下排蓝图有库存": {
+        "recognition": "OCR",
+        "roi": [925, 575, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [925, 488],
+        "next": ["周购_罕见上排蓝图列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_罕见上排蓝图列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_罕见上排蓝图", "周购_罕见限量微晶列表"],
+        "timeout": 6500
+    },
+    "周购_罕见上排蓝图": {
+        "recognition": "OCR",
+        "roi": [1055, 296, 172, 28],
+        "expected": "^构建蓝图$",
+        "only_rec": true,
+        "next": ["周购_罕见上排蓝图有库存", "周购_罕见限量微晶列表"],
+        "timeout": 6500
+    },
+    "周购_罕见上排蓝图有库存": {
+        "recognition": "OCR",
+        "roi": [1141, 337, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [1141, 250],
+        "next": ["周购_罕见限量微晶列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_罕见限量微晶列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_罕见限量微晶", "周购_前往军演"],
+        "timeout": 6500
+    },
+    "周购_罕见限量微晶": {
+        "recognition": "OCR",
+        "roi": [1055, 534, 172, 28],
+        "expected": "^微晶(?:[xX×]\\s*[0-9]+)?$",
+        "only_rec": true,
+        "next": ["周购_罕见限量微晶有库存", "周购_前往军演"],
+        "timeout": 6500,
+        "doc": "只检查右端下排的限量微晶。购买前仍要核对弹窗的限量标记。"
+    },
+    "周购_罕见限量微晶有库存": {
+        "recognition": "OCR",
+        "roi": [1141, 575, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [1141, 488],
+        "next": ["周购_前往军演"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_前往军演": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "action": "Click",
+        "post_delay": 1400,
+        "target": [218, 46],
+        "next": ["周购_出击"],
+        "timeout": 12000
+    },
+    "周购_出击": {
+        "recognition": "OCR",
+        "roi": [1090, 542, 190, 172],
+        "expected": "^出击$",
+        "action": "Click",
+        "post_delay": 1100,
+        "next": ["周购_模拟军演"],
+        "timeout": 10000
+    },
+    "周购_模拟军演": {
+        "recognition": "OCR",
+        "roi": [185, 282, 280, 174],
+        "expected": "^模拟军演$",
+        "action": "Click",
+        "post_delay": 1050,
+        "next": ["周购_镜像竞技"],
+        "timeout": 10000
+    },
+    "周购_镜像竞技": {
+        "recognition": "OCR",
+        "roi": [356, 355, 301, 154],
+        "expected": "^镜像竞技$",
+        "action": "Click",
+        "post_delay": 1500,
+        "next": ["周购_商店兑换"],
+        "timeout": 12000
+    },
+    "周购_商店兑换": {
+        "recognition": "OCR",
+        "roi": [214, 630, 120, 53],
+        "expected": "^商店兑换$",
+        "action": "Click",
+        "post_delay": 1100,
+        "next": ["周购_演习商店"],
+        "timeout": 12000
+    },
+    "周购_演习商店": {
+        "recognition": "OCR",
+        "roi": [83, 116, 65, 40],
+        "expected": "^演习$",
+        "next": ["周购_军演商品归左"],
+        "timeout": 10000
+    },
+    "周购_军演商品归左": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "action": "Swipe",
+        "begin": [278, 373],
+        "end": [1218, 373],
+        "duration": 550,
+        "post_delay": 900,
+        "next": ["周购_军演传说星尘列表"]
+    },
+    "周购_军演传说星尘列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_军演传说星尘", "周购_军演传说券列表"],
+        "timeout": 6500
+    },
+    "周购_军演传说星尘": {
+        "recognition": "OCR",
+        "roi": [48, 324, 172, 28],
+        "expected": "^[\\u4e00-\\u9fff]*传说星尘$",
+        "only_rec": true,
+        "next": ["周购_军演传说星尘有库存", "周购_军演传说券列表"],
+        "timeout": 6500
+    },
+    "周购_军演传说星尘有库存": {
+        "recognition": "OCR",
+        "roi": [134, 365, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [134, 278],
+        "next": ["周购_军演传说券列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_军演传说券列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_军演传说券", "周购_军演蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_军演传说券": {
+        "recognition": "OCR",
+        "roi": [264, 324, 172, 28],
+        "expected": "^传说星尘[券卷](?:[xX×]\\s*[0-9]+)?$",
+        "only_rec": true,
+        "next": ["周购_军演传说券有库存", "周购_军演蓝图列表"],
+        "timeout": 6500
+    },
+    "周购_军演传说券有库存": {
+        "recognition": "OCR",
+        "roi": [350, 365, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [350, 278],
+        "next": ["周购_军演蓝图列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_军演蓝图列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_军演蓝图", "周购_军演罕见券列表"],
+        "timeout": 6500
+    },
+    "周购_军演蓝图": {
+        "recognition": "OCR",
+        "roi": [479, 324, 172, 28],
+        "expected": "^构建蓝图$",
+        "only_rec": true,
+        "next": ["周购_军演蓝图有库存", "周购_军演罕见券列表"],
+        "timeout": 6500
+    },
+    "周购_军演蓝图有库存": {
+        "recognition": "OCR",
+        "roi": [565, 365, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [565, 278],
+        "next": ["周购_军演罕见券列表"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_军演罕见券列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "next": ["周购_军演罕见券", "周购_军演采购结束"],
+        "timeout": 6500
+    },
+    "周购_军演罕见券": {
+        "recognition": "OCR",
+        "roi": [264, 562, 172, 28],
+        "expected": "^罕见星尘[券卷](?:[xX×]\\s*[0-9]+)?$",
+        "only_rec": true,
+        "next": ["周购_军演罕见券有库存", "周购_军演采购结束"],
+        "timeout": 6500
+    },
+    "周购_军演罕见券有库存": {
+        "recognition": "OCR",
+        "roi": [350, 603, 65, 32],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [350, 516],
+        "next": ["周购_军演采购结束"],
+        "interrupt": ["周购_核对购买内容", "周购_关闭购买弹窗"],
+        "timeout": 8500
+    },
+    "周购_军演采购结束": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180,
+        "action": "Click",
+        "post_delay": 1200,
+        "target": [218, 46],
+        "next": ["周购_结束"],
+        "timeout": 12000
+    },
+    "周购_结束": {
+        "recognition": "OCR",
+        "roi": [980, 610, 160, 100],
+        "expected": "^补给站$"
+    },
+    "周购_核对购买内容": {
+        "recognition": "OCR",
+        "roi": [240, 402, 365, 35],
+        "expected": ["^传说星尘[券卷](?:[xX×]\\s*[0-9]+)?$", "^罕见星尘[券卷](?:[xX×]\\s*[0-9]+)?$", "^[\\u4e00-\\u9fff]*传说星尘$", "^构建蓝图$", "^(?:高纯|高级)硅化剂$", "^进化之息$", "^微晶$"],
+        "threshold": 0.65,
+        "next": ["周购_核对限量", "周购_关闭购买弹窗"],
+        "timeout": 6500
+    },
+    "周购_核对限量": {
+        "recognition": "OCR",
+        "roi": [237, 442, 100, 26],
+        "expected": "^限量[\\s:：]*[1-9][0-9]*$",
+        "only_rec": true,
+        "next": ["周购_最大", "周购_购买", "周购_关闭购买弹窗"],
+        "doc": "游戏在只能购买一件时会隐藏数量控件。优先选择最大，单件弹窗可直接购买。",
+        "timeout": 6500
+    },
+    "周购_最大": {
+        "recognition": "OCR",
+        "roi": [965, 413, 74, 32],
+        "expected": "^最大$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 450,
+        "target": [1001, 429],
+        "next": ["周购_核对购买数量", "周购_关闭购买弹窗"],
+        "timeout": 6500
+    },
+    "周购_核对购买数量": {
+        "recognition": "OCR",
+        "roi": [843, 413, 65, 30],
+        "expected": "^[1-9][0-9]*$",
+        "only_rec": true,
+        "next": ["周购_购买", "周购_关闭购买弹窗"],
+        "timeout": 6500
+    },
+    "周购_购买": {
+        "recognition": "OCR",
+        "roi": [845, 518, 70, 37],
+        "expected": "^购买$",
+        "only_rec": true,
+        "action": "Click",
+        "post_delay": 1250,
+        "target": [879, 537],
+        "next": ["周购_领取购买结果", "周购_货币不足", "周购_购买后列表"],
+        "on_error": ["周购_关闭购买弹窗"],
+        "timeout": 4500
+    },
+    "周购_领取购买结果": {
+        "recognition": "OCR",
+        "roi": [447, 117, 405, 117],
+        "expected": "获得物品",
+        "action": "Click",
+        "post_delay": 700,
+        "target": [638, 647],
+        "next": ["周购_购买后列表"],
+        "timeout": 8500
+    },
+    "周购_货币不足": {
+        "recognition": "OCR",
+        "roi": [469, 286, 347, 68],
+        "expected": "货币不足|兑换币不足",
+        "action": "Click",
+        "post_delay": 600,
+        "target": [476, 450],
+        "next": ["周购_关闭购买弹窗", "周购_购买后列表"],
+        "timeout": 8500
+    },
+    "周购_关闭购买弹窗": {
+        "recognition": "TemplateMatch",
+        "template": "KagawaFestival/ShopClose.png",
+        "roi": [997, 122, 56, 46],
+        "threshold": 0.9,
+        "action": "Click",
+        "post_delay": 700,
+        "target": [1027, 145],
+        "next": ["周购_购买后列表"],
+        "timeout": 8500
+    },
+    "周购_购买后列表": {
+        "recognition": "ColorMatch",
+        "roi": [204, 35, 30, 23],
+        "method": 4,
+        "lower": [235, 235, 235],
+        "upper": [255, 255, 255],
+        "count": 180
+    }
+}

@@ -1,0 +1,662 @@
+{
+    "刷主线_入口": {
+        "doc": "固定刷普通7-8。支持从首页、出击页、章节地图或关卡列表开始；不选择其他关卡，不补充燃料。",
+        "next": [
+            "子任务_退出待机",
+            "子任务_关闭星贸凭证",
+            "子任务_关闭公告",
+            "子任务_关闭周年公告",
+            "子任务_获得物品",
+            "刷主线_进入第七章",
+            "刷主线_第七章",
+            "刷主线_主线剧情",
+            "刷主线_普通难度",
+            "刷主线_关卡78",
+            "刷主线_出击"
+        ],
+        "timeout": 30000
+    },
+    "刷主线_出击": {
+        "recognition": "OCR",
+        "expected": "^出击$",
+        "roi": [
+            1090,
+            540,
+            190,
+            180
+        ],
+        "action": "Click",
+        "post_delay": 1500,
+        "next": [
+            "刷主线_第七章",
+            "刷主线_主线剧情"
+        ]
+    },
+    "刷主线_主线剧情": {
+        "recognition": "OCR",
+        "expected": "主线剧情",
+        "roi": [
+            350,
+            400,
+            550,
+            260
+        ],
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "刷主线_第七章"
+        ],
+        "timeout": 3000,
+        "on_error": [
+            "刷主线_查找章节1"
+        ]
+    },
+    "刷主线_第七章": {
+        "recognition": "TemplateMatch",
+        "template": "MainStory/Chapter07.png",
+        "threshold": 0.85,
+        "roi": [
+            170,
+            600,
+            950,
+            120
+        ],
+        "action": "Click",
+        "post_delay": 1500,
+        "next": [
+            "刷主线_进入第七章",
+            "刷主线_普通难度"
+        ],
+        "timeout": 15000
+    },
+    "刷主线_进入第七章": {
+        "recognition": "OCR",
+        "expected": "虚拟场域",
+        "roi": [400, 350, 440, 190],
+        "action": "Click",
+        "post_delay": 1500,
+        "next": ["刷主线_普通难度"],
+        "timeout": 15000,
+        "doc": "出击页缩略卡先展开章节选择页，再点击第7章虚拟场域进入地图。"
+    },
+    "刷主线_普通难度": {
+        "recognition": "OCR",
+        "expected": "^普通$",
+        "roi": [
+            0,
+            610,
+            240,
+            110
+        ],
+        "action": "Click",
+        "post_delay": 1200,
+        "next": [
+            "刷主线_寻找区域"
+        ]
+    },
+    "刷主线_寻找区域": {
+        "next": [
+            "刷主线_关卡78",
+            "刷主线_米德加尔特"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_向左上拖动1"
+        ]
+    },
+    "刷主线_米德加尔特": {
+        "recognition": "OCR",
+        "expected": "米德加尔特",
+        "roi": [
+            160,
+            70,
+            1100,
+            610
+        ],
+        "action": "Click",
+        "post_delay": 1200,
+        "next": [
+            "刷主线_关卡78"
+        ],
+        "timeout": 15000
+    },
+    "刷主线_关卡78": {
+        "recognition": "OCR",
+        "expected": "^关卡\\s*7\\s*[-－—]\\s*8$|^传说之外$",
+        "roi": [
+            0,
+            70,
+            500,
+            560
+        ],
+        "action": "Click",
+        "post_delay": 1200,
+        "next": [
+            "刷主线_扫荡"
+        ],
+        "timeout": 15000,
+        "doc": "精确匹配7-8或传说之外，不能匹配7-9、7-10、7-80。"
+    },
+    "刷主线_燃料不足": {
+        "recognition": "OCR",
+        "expected": "燃料补给|燃料不足",
+        "roi": [
+            180,
+            70,
+            900,
+            320
+        ],
+        "doc": "保留弹窗并结束，不购买、不使用燃料道具。"
+    },
+    "刷主线_查找章节1": {
+        "recognition": "OCR",
+        "expected": "主线剧情",
+        "roi": [
+            350,
+            400,
+            550,
+            260
+        ],
+        "action": "Swipe",
+        "begin": [
+            1000,
+            670,
+            10,
+            10
+        ],
+        "end": [
+            350,
+            670,
+            10,
+            10
+        ],
+        "duration": 500,
+        "post_delay": 1000,
+        "next": [
+            "刷主线_第七章"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_查找章节2"
+        ]
+    },
+    "刷主线_查找章节2": {
+        "recognition": "OCR",
+        "expected": "主线剧情",
+        "roi": [
+            350,
+            400,
+            550,
+            260
+        ],
+        "action": "Swipe",
+        "begin": [
+            1000,
+            670,
+            10,
+            10
+        ],
+        "end": [
+            350,
+            670,
+            10,
+            10
+        ],
+        "duration": 500,
+        "post_delay": 1000,
+        "next": [
+            "刷主线_第七章"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_查找章节3"
+        ]
+    },
+    "刷主线_查找章节3": {
+        "recognition": "OCR",
+        "expected": "主线剧情",
+        "roi": [
+            350,
+            400,
+            550,
+            260
+        ],
+        "action": "Swipe",
+        "begin": [
+            1000,
+            670,
+            10,
+            10
+        ],
+        "end": [
+            350,
+            670,
+            10,
+            10
+        ],
+        "duration": 500,
+        "post_delay": 1000,
+        "next": [
+            "刷主线_第七章"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_查找章节4"
+        ]
+    },
+    "刷主线_查找章节4": {
+        "recognition": "OCR",
+        "expected": "主线剧情",
+        "roi": [
+            350,
+            400,
+            550,
+            260
+        ],
+        "action": "Swipe",
+        "begin": [
+            1000,
+            670,
+            10,
+            10
+        ],
+        "end": [
+            350,
+            670,
+            10,
+            10
+        ],
+        "duration": 500,
+        "post_delay": 1000,
+        "next": [
+            "刷主线_第七章"
+        ],
+        "timeout": 2500
+    },
+    "刷主线_向左上拖动1": {
+        "recognition": "OCR",
+        "expected": "普通|困难",
+        "roi": [
+            0,
+            610,
+            240,
+            110
+        ],
+        "action": "Swipe",
+        "begin": [
+            960,
+            510,
+            10,
+            10
+        ],
+        "end": [
+            510,
+            270,
+            10,
+            10
+        ],
+        "duration": 600,
+        "post_delay": 1200,
+        "next": [
+            "刷主线_关卡78",
+            "刷主线_米德加尔特"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_向左上拖动2"
+        ]
+    },
+    "刷主线_向左上拖动2": {
+        "recognition": "OCR",
+        "expected": "普通|困难",
+        "roi": [
+            0,
+            610,
+            240,
+            110
+        ],
+        "action": "Swipe",
+        "begin": [
+            960,
+            510,
+            10,
+            10
+        ],
+        "end": [
+            510,
+            270,
+            10,
+            10
+        ],
+        "duration": 600,
+        "post_delay": 1200,
+        "next": [
+            "刷主线_关卡78",
+            "刷主线_米德加尔特"
+        ],
+        "timeout": 2500,
+        "on_error": [
+            "刷主线_向左上拖动3"
+        ]
+    },
+    "刷主线_向左上拖动3": {
+        "recognition": "OCR",
+        "expected": "普通|困难",
+        "roi": [
+            0,
+            610,
+            240,
+            110
+        ],
+        "action": "Swipe",
+        "begin": [
+            960,
+            510,
+            10,
+            10
+        ],
+        "end": [
+            510,
+            270,
+            10,
+            10
+        ],
+        "duration": 600,
+        "post_delay": 1200,
+        "next": [
+            "刷主线_关卡78",
+            "刷主线_米德加尔特"
+        ],
+        "timeout": 2500
+    },
+    "刷主线_扫荡": {
+        "recognition": "OCR",
+        "expected": "扫荡",
+        "roi": [
+            740,
+            540,
+            300,
+            150
+        ],
+        "action": "Click",
+        "pre_wait_freezes": {
+            "time": 1000,
+            "threshold": 0.95
+        },
+        "next": [
+            "刷主线_扫荡次数选择"
+        ],
+        "focus": true,
+        "timeout": 30000
+    },
+    "刷主线_扫荡次数选择": {
+        "enabled": true,
+        "next": [
+            "刷主线_检查燃料-红",
+            "刷主线_扫荡_达到次数上限",
+            "刷主线_检查燃料-白"
+        ],
+        "timeout": 30000
+    },
+    "刷主线_检查燃料-红": {
+        "recognition": "ColorMatch",
+        "roi": [
+            730,
+            547,
+            62,
+            35
+        ],
+        "method": 4,
+        "lower": [
+            150,
+            0,
+            0
+        ],
+        "upper": [
+            255,
+            120,
+            120
+        ],
+        "action": "DoNothing",
+        "pre_wait_freezes": {
+            "time": 1000,
+            "threshold": 0.95
+        },
+        "next": [
+            "刷主线_检查燃料-红（次数为1）",
+            "刷主线_减少次数"
+        ],
+        "count": 12,
+        "timeout": 30000
+    },
+    "刷主线_检查燃料-白": {
+        "recognition": "ColorMatch",
+        "roi": [
+            730,
+            547,
+            62,
+            35
+        ],
+        "method": 4,
+        "lower": [
+            220,
+            220,
+            220
+        ],
+        "upper": [
+            255,
+            255,
+            255
+        ],
+        "action": "DoNothing",
+        "pre_wait_freezes": {
+            "time": 1000,
+            "threshold": 0.95
+        },
+        "next": [
+            "刷主线_增加次数"
+        ],
+        "count": 12,
+        "timeout": 30000
+    },
+    "刷主线_增加次数": {
+        "action": "Click",
+        "target": [
+            544,
+            558,
+            10,
+            10
+        ],
+        "next": [
+            "刷主线_扫荡次数选择"
+        ],
+        "post_delay": 300,
+        "timeout": 30000
+    },
+    "刷主线_减少次数": {
+        "action": "Click",
+        "target": [
+            244,
+            559,
+            10,
+            10
+        ],
+        "next": [
+            "刷主线_扫荡_减少后检查"
+        ],
+        "post_delay": 300,
+        "timeout": 30000
+    },
+    "刷主线_检查燃料-红（次数为1）": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            200,
+            490,
+            160,
+            105
+        ],
+        "action": "DoNothing",
+        "pre_wait_freezes": {
+            "time": 1000,
+            "threshold": 0.95
+        },
+        "next": [
+            "刷主线_扫荡-取消界面"
+        ],
+        "focus": true,
+        "template": "扫荡次数1.png",
+        "threshold": 0.98,
+        "timeout": 30000
+    },
+    "刷主线_扫荡-取消界面": {
+        "action": "Click",
+        "target": [
+            640,
+            80,
+            1,
+            1
+        ],
+        "next": [],
+        "timeout": 30000
+    },
+    "刷主线_扫荡_减少后检查": {
+        "next": [
+            "刷主线_检查燃料-红",
+            "刷主线_开始战斗"
+        ],
+        "timeout": 30000
+    },
+    "刷主线_扫荡_达到次数上限": {
+        "recognition": "OCR",
+        "expected": "^10$",
+        "roi": [
+            210,
+            497,
+            380,
+            40
+        ],
+        "next": [
+            "刷主线_开始战斗"
+        ],
+        "timeout": 30000
+    },
+    "刷主线_开始战斗": {
+        "recognition": "OCR",
+        "expected": "开始战斗",
+        "roi": [
+            860,
+            500,
+            240,
+            130
+        ],
+        "pre_wait_freezes": {
+            "time": 1000,
+            "threshold": 0.95
+        },
+        "action": "Click",
+        "next": [
+            "刷主线_燃料不足",
+            "刷主线_不使用加成",
+            "刷主线_扫荡成功"
+        ],
+        "focus": true,
+        "timeout": 30000
+    },
+    "刷主线_扫荡成功": {
+        "recognition": "OCR",
+        "expected": "扫荡成功|扫荡奖励",
+        "roi": [
+            5,
+            2,
+            530,
+            155
+        ],
+        "pre_wait_freezes": {
+            "time": 3000,
+            "threshold": 0.95
+        },
+        "action": "Click",
+        "next": [
+            "刷主线_扫荡升级",
+            "刷主线_扫荡成功-检查",
+            "刷主线_扫荡结束"
+        ],
+        "timeout": 30000,
+        "target": [
+            190,
+            80,
+            20,
+            20
+        ]
+    },
+    "刷主线_扫荡升级": {
+        "is_sub": true,
+        "recognition": "TemplateMatch",
+        "template": "Combat/DailyExplore_LevelUp.png",
+        "roi": [
+            540,
+            242,
+            207,
+            91
+        ],
+        "action": "Click",
+        "timeout": 30000
+    },
+    "刷主线_扫荡成功-检查": {
+        "recognition": "OCR",
+        "expected": "扫荡成功|扫荡奖励",
+        "roi": [
+            5,
+            2,
+            530,
+            155
+        ],
+        "pre_wait_freezes": {
+            "time": 3000,
+            "threshold": 0.95
+        },
+        "action": "Click",
+        "next": [
+            "刷主线_扫荡成功-检查",
+            "刷主线_扫荡结束"
+        ],
+        "timeout": 30000,
+        "target": [
+            190,
+            80,
+            20,
+            20
+        ]
+    },
+    "刷主线_扫荡结束": {
+        "recognition": "OCR",
+        "expected": "扫荡",
+        "roi": [
+            740,
+            540,
+            300,
+            150
+        ],
+        "action": "DoNothing",
+        "next": [
+            "刷主线_扫荡"
+        ],
+        "timeout": 30000
+    },
+    "刷主线_不使用加成": {
+        "recognition": "OCR",
+        "expected": "不使用",
+        "roi": [
+            300,
+            360,
+            320,
+            160
+        ],
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "刷主线_燃料不足",
+            "刷主线_扫荡成功"
+        ]
+    }
+}

@@ -1,8 +1,14 @@
 {
     "Awards": {
         "next": [
-            "子任务_点击取消",
+            "子任务_退出待机",
+            "子任务_关闭物品详情",
+            "子任务_关闭星贸凭证",
             "子任务_关闭公告",
+            "子任务_关闭周年公告",
+            "子任务_获得物品",
+            "子任务_点击取消",
+            "Mail_Empty",
             "Mail",
             "NoMail",
             "子任务_进入首页"
@@ -21,8 +27,8 @@
         "post_delay": 2000,
         "next": [
             "Mail_Receive",
-            "Mail",
-            "进入首页"
+            "Mail_Empty",
+            "Mail"
         ]
     },
     "Mail_Receive": {
@@ -46,12 +52,33 @@
         ],
         "count": 7,
         "action": "Click",
-           "post_delay": 2000,
+        "post_delay": 2000,
+        "next": [
+            "子任务_获得物品",
+            "Mail_Receive",
+            "Mail_Empty"
+        ]
+    },
+    "Mail_Empty": {
+        "recognition": "OCR",
+        "expected": "^待领取邮件\\s*[:：]\\s*0\\s*$",
+        "roi": [
+            1060,
+            125,
+            180,
+            37
+        ],
+        "action": "Click",
+        "target": [
+            206,
+            37,
+            25,
+            22
+        ],
+        "post_delay": 1500,
         "next": [
             "DailyTask",
-            "NoDailyTask",
-            "Mail_Receive",
-            "子任务_进入首页"
+            "NoDailyTask"
         ]
     },
     "NoMail": {
@@ -199,7 +226,7 @@
         "recognition": "TemplateMatch",
         "template": "StartUp/NoDailyTask.png",
         "roi": [
-           684,
+            684,
             606,
             80,
             80
@@ -432,7 +459,7 @@
         ]
     },
     "NoBattlePass": {
-         "recognition": "OCR",
+        "recognition": "OCR",
         "expected": [
             "指南"
         ],

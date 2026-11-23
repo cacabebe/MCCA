@@ -1,6 +1,12 @@
 {
     "Infrastructures": {
         "next": [
+            "子任务_退出待机",
+            "子任务_关闭物品详情",
+            "子任务_关闭星贸凭证",
+            "子任务_关闭公告",
+            "子任务_关闭周年公告",
+            "子任务_获得物品",
             "Base",
             "Infr_收取资源",
             "子任务_进入首页"
@@ -753,7 +759,7 @@
             "InfrastructureS/构建订单1.png",
             "InfrastructureS/构建订单4.png"
         ],
-        "threshold": 0.90,
+        "threshold": 0.9,
         "roi": [
             272,
             89,
